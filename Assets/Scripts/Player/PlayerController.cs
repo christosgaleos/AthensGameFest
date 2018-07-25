@@ -30,6 +30,9 @@ public class PlayerController : MonoBehaviour
     float DASHFORCE = 6f;
     float JUMPFORCE = 6f;
 
+    float JumpCooldown = 0.2f;
+    float timer = 0f;
+
     private Vector3 movement;
     private Rigidbody playerRigidBody;
 
@@ -64,10 +67,14 @@ public class PlayerController : MonoBehaviour
         }
 
         jump = false;
-        if (Input.GetButtonDown(JumpButton) && CheckIfGrounded())
+        if (Input.GetButtonDown(JumpButton) && CheckIfGrounded() && timer <= 0)
         {
+            timer = JumpCooldown;
             jump = true;
         }
+
+        timer -= Time.deltaTime;
+        Debug.Log(timer);
     }
 
     void FixedUpdate()
