@@ -8,7 +8,7 @@ public class PlayerMovement : MonoBehaviour
     public Camera mainCamera;
     Vector3 targetPlayerVelocity;
 
-    float MOVSPEED = 2f;
+    float MOVSPEED = 3f;
 
     bool playerMovesForward = false;
     bool playerMovesBackward = false;

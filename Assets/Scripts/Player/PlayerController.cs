@@ -136,7 +136,14 @@ public class PlayerController : MonoBehaviour
 
     void Jump()
     {
-        GetComponent<Rigidbody>().AddForce((transform.up + transform.forward / 2) * JUMPFORCE, ForceMode.Impulse);
+        if ((Input.GetAxisRaw(HorizontalAxis) == 0) && Input.GetAxisRaw(VerticalAxis) == 0)
+        {
+            GetComponent<Rigidbody>().AddForce(transform.up * JUMPFORCE, ForceMode.Impulse);
+        }
+        else
+        {
+            GetComponent<Rigidbody>().AddForce((transform.up + transform.forward / 2) * JUMPFORCE, ForceMode.Impulse);
+        }
     }
 
     bool CheckIfGrounded()
