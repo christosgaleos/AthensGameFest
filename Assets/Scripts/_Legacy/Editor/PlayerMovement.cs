@@ -5,8 +5,9 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour
 {
     GameObject player;
-    public Camera camera;
+    public Camera mainCamera;
     Vector3 targetPlayerVelocity;
+
     float MOVSPEED = 2f;
 
     bool playerMovesForward = false;
