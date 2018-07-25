@@ -31,7 +31,7 @@ public class PlayerController : MonoBehaviour
     float JUMPFORCE = 6f;
 
     float JumpCooldown = 0.2f;
-    float timer = 0f;
+    static float timer = 0f;
 
     private Vector3 movement;
     private Rigidbody playerRigidBody;
@@ -73,7 +73,7 @@ public class PlayerController : MonoBehaviour
             jump = true;
         }
 
-        timer -= Time.deltaTime;
+        timer = timer - Time.deltaTime;
         Debug.Log(timer);
     }
 
