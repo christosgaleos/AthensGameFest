@@ -17,13 +17,17 @@ public class PlayerController : MonoBehaviour
     string VerticalAxis;
     string SprintButton;
     string DashButton;
+    string JumpButton;
 
     public float speed = 2f;
     public float runSpeed = 5f;
     public float turnSmoothing = 15f;
 
     bool dash = false;
+    bool jump = false;
+
     float DASHFORCE = 6f;
+    float JUMPFORCE = 6f;
 
     private Vector3 movement;
     private Rigidbody playerRigidBody;
@@ -36,6 +40,7 @@ public class PlayerController : MonoBehaviour
             VerticalAxis = "Vertical1";
             SprintButton = "Sprint1";
             DashButton = "Dash1";
+            JumpButton = "Jump1";
         }
         else
         {
@@ -43,6 +48,7 @@ public class PlayerController : MonoBehaviour
             VerticalAxis = "Vertical2";
             SprintButton = "Sprint2";
             DashButton = "Dash2";
+            JumpButton = "Jump2";
         }
 
         playerRigidBody = GetComponent<Rigidbody>();
@@ -54,6 +60,12 @@ public class PlayerController : MonoBehaviour
         if (Input.GetButtonDown(DashButton))
         {
             dash = true;
+        }
+
+        jump = false;
+        if (Input.GetButtonDown(JumpButton))
+        {
+            jump = true;
         }
     }
 
@@ -67,6 +79,11 @@ public class PlayerController : MonoBehaviour
         if (dash == true)
         {
             Dash();
+        }
+
+        if (jump == true)
+        {
+            Jump();
         }
     }
 
@@ -114,5 +131,10 @@ public class PlayerController : MonoBehaviour
         GetComponent<Rigidbody>().AddForce(transform.forward * DASHFORCE, ForceMode.Impulse);
         //GetComponent<Rigidbody>().velocity = transform.forward * 6f;
         //transform.position = new Vector3(1, 0, 1);
+    }
+
+    void Jump()
+    {
+        GetComponent<Rigidbody>().AddForce((transform.up + transform.forward / 2) * JUMPFORCE, ForceMode.Impulse);
     }
 }
