@@ -25,6 +25,7 @@ public class PlayerController : MonoBehaviour
 
     bool dash = false;
     bool jump = false;
+    bool isGrounded = false;
 
     float DASHFORCE = 6f;
     float JUMPFORCE = 6f;
@@ -63,7 +64,7 @@ public class PlayerController : MonoBehaviour
         }
 
         jump = false;
-        if (Input.GetButtonDown(JumpButton))
+        if (Input.GetButtonDown(JumpButton) && CheckIfGrounded())
         {
             jump = true;
         }
@@ -136,5 +137,19 @@ public class PlayerController : MonoBehaviour
     void Jump()
     {
         GetComponent<Rigidbody>().AddForce((transform.up + transform.forward / 2) * JUMPFORCE, ForceMode.Impulse);
+    }
+
+    bool CheckIfGrounded()
+    {
+        //Debug.Log("Button pressed, checking grounding...");
+        isGrounded = (Physics.Raycast(transform.position, Vector3.down, 1.1f)); // if it fails, slope is too incline, increase the number or reduce incline
+        //Debug.Log("Grounding check was " + isGrounded);
+
+        return isGrounded;
+    }
+
+    void OnDrawGizmos()
+    {
+        Debug.DrawRay(transform.position, Vector3.down, Color.red, 1.1f);
     }
 }
